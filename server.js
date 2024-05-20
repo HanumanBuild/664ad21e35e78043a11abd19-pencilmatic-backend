@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const drawingRoutes = require('./routes/drawing');
 
@@ -22,6 +23,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).catch((err) => {
   console.error('Error connecting to MongoDB', err);
 });
+
+app.use(cors());
 
 app.use('/auth', authRoutes);
 app.use('/drawings', drawingRoutes);
